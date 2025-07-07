@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineCarRentalApp.DAL\OnlineCarRentalApp.DAL.csproj" />
+    <ProjectReference Include="..\OnlineCarRentalApp.Domain\OnlineCarRentalApp.Domain.csproj" />
+    <ProjectReference Include="..\OnlineCarRentalApp.Service\OnlineCarRentalApp.Service.csproj" />
+  </ItemGroup>
+
+</Project>
