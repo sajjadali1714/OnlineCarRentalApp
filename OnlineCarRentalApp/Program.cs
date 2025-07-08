@@ -1,7 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using OnlineCarRentalApp.DAL;
+using OnlineCarRentalApp.Domain.Repository;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(connectionString));
 
 var app = builder.Build();
 

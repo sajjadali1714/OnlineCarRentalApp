@@ -4,46 +4,163 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OnlineCarRentalApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/OnlineCarRentalApp.styles.css" asp-append-version="true" />
+    <link rel="icon" href="@Url.Content("~/GradientTemplate/assets/images/favicon.svg")" type="image/x-icon">
+<!-- map-vector css -->
+<link rel="stylesheet" href="@Url.Content("~/GradientTemplate/assets/css/plugins/jsvectormap.min.css")">
+<!-- [Google Font : Poppins] icon -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- [Tabler Icons] https://tablericons.com -->
+<link rel="stylesheet" href="@Url.Content("~/GradientTemplate/assets/fonts/tabler-icons.min.css")">
+<!-- [Feather Icons] https://feathericons.com -->
+<link rel="stylesheet" href="@Url.Content("~/GradientTemplate/assets/fonts/feather.css")">
+<!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+<link rel="stylesheet" href="@Url.Content("~/GradientTemplate/assets/fonts/fontawesome.css")">
+<!-- [Material Icons] https://fonts.google.com/icons -->
+<link rel="stylesheet" href="@Url.Content("~/GradientTemplate/assets/fonts/material.css")">
+<!-- [Template CSS Files] -->
+<link rel="stylesheet" href="@Url.Content("~/GradientTemplate/assets/css/style.css")" id="main-style-link">
+<link rel="stylesheet" href="@Url.Content("~/GradientTemplate/assets/css/style-preset.css")">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/js/CustomChart.js"></script>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OnlineCarRentalApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+<body data-pc-header="header-1" data-pc-preset="preset-1" data-pc-sidebar-theme="light" data-pc-sidebar-caption="true"
+    data-pc-direction="ltr" data-pc-theme="light" onload="createChart()">
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+
+    <!-- [ Sidebar Menu ] start -->
+    <nav class="pc-sidebar">
+        <div class="navbar-wrapper">
+            <div class="navbar-content">
+                <ul class="pc-navbar">
+                    <li class="pc-item">
+                        <a href="../" class="pc-link"><span class="pc-micon">
+                                <i class="ph ph-gauge"></i></span><span class="pc-mtext">Dashboard</span></a>
+                    </li>
+
+
+                    <li class="pc-item pc-caption">
+                        <label>Sales Analysis</label>
+                        <i class="ph ph-compass-tool"></i>
+                    </li>
+                    <li class="pc-item">
+                        <a href="../Home/SalesDashboard" class="pc-link">
+                            <span class="pc-micon"><i class="ph ph-text-aa"></i></span>
+                            <span class="pc-mtext">Sales Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="../Home/SalesDetail" class="pc-link">
+                            <span class="pc-micon"><i class="ph ph-palette"></i></span>
+                            <span class="pc-mtext">Sales Detail</span>
+                        </a>
+                    </li>
+
+                    <li class="pc-item pc-caption">
+                        <label>Product Analysis</label>
+                        <i class="ph ph-devices"></i>
+                    </li>
+                    <li class="pc-item">
+                        <a href="../Home/ProductDashboard" class="pc-link">
+                            <span class="pc-micon"><i class="ph ph-text-aa"></i></span>
+                            <span class="pc-mtext">Product Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="../Home/ProductDetail" class="pc-link">
+                            <span class="pc-micon"><i class="ph ph-palette"></i></span>
+                            <span class="pc-mtext">Product Detail</Details></span>
+                        </a>
+                    </li>
+                    <li class="pc-item pc-caption">
+                        <label>Customer Analysis</label>
+                        <i class="ph ph-suitcase"></i>
+                    </li>
+                    <li class="pc-item">
+                        <a href="../Home/CustomerDashboard" class="pc-link">
+                            <span class="pc-micon"><i class="ph ph-text-aa"></i></span>
+                            <span class="pc-mtext">Customer Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="pc-item">
+                        <a href="../Home/CustomerDetail" class="pc-link">
+                            <span class="pc-micon"><i class="ph ph-palette"></i></span>
+                            <span class="pc-mtext">Customer Detail</Details></span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
+    <!-- [ Sidebar Menu ] end -->
+    <!-- [ Header Topbar ] start -->
+    <header class="pc-header">
+        <div class="m-header">
+            <a href="../" class="b-brand text-primary">
+                <!-- ========   Change your logo from here   ============ -->
+                <h4 class="text-white">S&S Data Analyst</h4>
+            </a>
+        </div>
+        <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+
+        </div>
     </header>
-    <div class="container">
+    <!-- [ Header ] end -->
+
+
+
+    <!-- [ Main Content ] start -->
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - OnlineCarRentalApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- [ Main Content ] end -->
+    <footer class="pc-footer">
+        <div class="footer-wrapper container-fluid">
+            <div class="row">
+                <div class="col-sm-6 my-1">
+                    <p class="m-0">Desing & Develop by Sohail Ahmed & Sajjad Ali</a></p>
+                </div>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- [Page Specific JS] start -->
+    <script src="@Url.Content("~/GradientTemplate/assets/js/plugins/apexcharts.min.js")"></script>
+    <script src="@Url.Content("~/GradientTemplate/assets/js/plugins/jsvectormap.min.js")"></script>
+    <script src="@Url.Content("~/GradientTemplate/assets/js/plugins/world.js")"></script>
+    <script src="@Url.Content("~/GradientTemplate/assets/js/plugins/world-merc.js")"></script>
+    <script src="@Url.Content("~/GradientTemplate/assets/js/pages/dashboard-sales.js")"></script>
+    <!-- [Page Specific JS] end -->
+    <!-- Required Js -->
+    <script src="@Url.Content("~/GradientTemplate/assets/js/plugins/simplebar.min.js")"></script>
+    <script src="@Url.Content("~/GradientTemplate/assets/js/plugins/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/GradientTemplate/assets/js/fonts/custom-font.js")"></script>
+    <script src="@Url.Content("~/GradientTemplate/assets/js/pcoded.js")"></script>
+    <script src="@Url.Content("~/GradientTemplate/assets/js/plugins/feather.min.js")"></script>
+
+
+
+
+
+    <script>layout_change('light');</script>
+    <script>layout_sidebar_change('light');</script>
+    <script>change_box_container('false');</script>
+    <script>layout_caption_change('true');</script>
+    <script>layout_rtl_change('false');</script>
+    <script>preset_change("preset-1");</script>
+    <script>header_change("header-1");</script>
+
+
+
 </body>
+<!-- [Body] end -->
+
 </html>
